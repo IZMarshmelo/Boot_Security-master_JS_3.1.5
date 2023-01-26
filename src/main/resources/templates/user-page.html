@@ -11,16 +11,21 @@
 </head>
 <body>
 
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg bg-dark">
   <div class="container-fluid">
-    <p class="navbar-brand text-white">
-      <b><span class="align-middle" th:text="${user.username}"></span></b>
-      <span class="align-middle">with roles:</span>
-      <span class="align-middle" th:text="${user.roles}"></span>
-    </p>
-    <form th:action="@{/logout}" method="post">
-      <button type="submit" class="btn btn-dark text-secondary">Logout</button>
-    </form>
+    <a class="navbar-brand text-light"  href="#">
+      <span class="fw-bold" sec:authentication="name"></span>
+      <span class="fst-italic">with roles: </span>
+      <span class="fw-bold" th:each="authority, iterStat:${#authentication.getAuthorities()}"
+            th:text="${authority.getAuthority().replaceFirst('ROLE_', '') + (iterStat.last?'':', ')}">
+                </span>
+    </a>
+    <div class="m-2 navbar-text">
+      <form th:action="@{/logout}" method="post">
+        <input type="submit" class="btn btn-dark btn-sm" value="Logout">
+        <input type="hidden" name="_csrf" value="{{.csrf_token}}">
+      </form>
+    </div>
   </div>
 </nav>
 <div class="container-fluid h-100">
@@ -56,17 +61,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td th:text="${user.id}"></td>
-                  <td th:text="${user.firstName}"></td>
-                  <td th:text="${user.lastName}"></td>
-                  <td th:text="${user.age}"></td>
-                  <td th:text="${user.email}"></td>
+                <tr th:each="user : ${user}">
+                  <td th:text="${user.getId()}"/>
+                  <td th:text="${user.getFirstName()}"/>
+                  <td th:text="${user.getLastName()}"/>
+                  <td th:text="${user.getAge()}"/>
+                  <td th:text="${user.getEmail()}"/>
+                  <td th:text="${user.getRolesString()}"/>
                   <td>
-                    <th:block th:each="role: ${user.roles}"
-                              th:text="${role.name} + ' '">
-                    </th:block>
-                  </td>
                 </tr>
                 </tbody>
               </table>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Регистрация</title>
+</head>
+
+<body>
+<div>
+    <form name="f" method="POST" modelAttribute="userForm">
+        <h2>Регистрация</h2>
+        <label for="Username">Введите имя пользователя:</label>
+        <input type="text" name="username" id="Username">
+        <br/>
+        <label for="email">Введите вашу почту:</label>
+        <input type="email" name="email" id="email">
+        <br/>
+        <label for="LastName">Введите ваше имя:</label>
+        <input type="text" name="lastName" id="LastName">
+        <br/>
+        <label for="FirstName">Введите вашу фамилию:</label>
+        <input type="text" name="firstName" id="FirstName">
+        <br/>
+        <label for="Age">Введите ваш возраст:</label>
+        <input type="text" name="Age" id="Age">
+        <br/>
+        <label for="Password">Введите пароль:</label>
+        <input type="password" name="password" id="Password">
+        <br/>
+        <label for="Password">Введите пароль ещё раз</label>
+        <label>
+            <input type="password" name="passwordConfirm"
+                            placeholder="Confirm your password">
+        </label>
+        <br/>
+        <div th:if="${passwordError}" style="color: red">
+            неправильный пароль
+        </div>
+        <button type="submit" >Зарегистрироваться </button>
+    </form>
+    <a href="/">Главная</a>
+</div>
+</body>
+</html>

@@ -51,7 +51,7 @@ public class User {
     @Transient
     private String passwordConfirm;
 
-    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "t_user_roles",
             joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
@@ -166,7 +166,7 @@ public class User {
                 '}';
     }
 
-    public String getRolesString() {
+    public String getRolesToString() {
         return roles.stream().map(Role::getName).map(role-> role.replace("ROLE_", "")).collect(Collectors.joining(", "));
     }
 

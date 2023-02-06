@@ -40,4 +40,14 @@ public class RegistrationController {
 
         return "redirect:/login";
     }
+
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
+
+    @GetMapping(value = "login")
+    public String loginPage() {
+        return "redirect:/login";
+    }
 }

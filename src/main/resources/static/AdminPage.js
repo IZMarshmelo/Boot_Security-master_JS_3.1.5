@@ -3,7 +3,7 @@ const dbRoles = [{id: 1, name: "ROLE_ADMIN"}, {id: 2, name: "ROLE_USER"}]
 
 const showNavbarInfo = (user) => {
     document.getElementById("top-panel").innerHTML =
-        `<h5>${user.email} with roles: ${user.role}</h5>`
+        `<h5>${user.email} with roles: ${user.rolesToString}</h5>`
 }
 fetch('api/user/')
     .then(response => response.json())

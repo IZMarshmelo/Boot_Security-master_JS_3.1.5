@@ -13,6 +13,7 @@ const showUserInfo = (user) => {
     userPageInfo +=
         `<tr>
             <td>${user.id}</td>
+            <td>${user.username}</td>
             <td>${user.firstName}</td>
             <td>${user.lastName}</td>
             <td>${user.age}</td>

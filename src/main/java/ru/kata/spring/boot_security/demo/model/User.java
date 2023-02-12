@@ -4,7 +4,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -62,9 +61,8 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private Set<Role> roles;
 
-    public User(String username, String firstName, String lastName, byte age, String email, String password,
+    public User(String firstName, String lastName, byte age, String email, String password,
                 Set<Role> roles) {
-        this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -82,7 +80,7 @@ public class User implements UserDetails {
     }
 
     public String getUsername() {
-        return username;
+        return email;
     }
 
     public void setUsername(String username) {
@@ -149,9 +147,6 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public void setRoles(String roleUser) {
-    }
-
     public byte getAge() {
         return age;
     }
@@ -166,14 +161,22 @@ public class User implements UserDetails {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", password='" + password + '\'' +
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 '}';
     }
 
-    public String getRolesToString() {
+    /*public String getRolesToString() {
         return roles.stream().map(Role::getName).map(role-> role.replace("ROLE_", "")).collect(Collectors.joining(", "));
+    }*/
+
+    public String getRolesToString() {
+        StringBuilder sb = new StringBuilder();
+        for (Role role : roles) {
+            sb.append(role.getName())
+                    .append(" ");
+        }
+        return sb.toString();
     }
 
     @Override
@@ -181,14 +184,13 @@ public class User implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return age == user.age && Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(username, user.username) && Objects.equals(password, user.password);
+        return age == user.age && Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, age, username, password);
+        return Objects.hash(id, firstName, lastName, email, age, password);
     }
-
 
     @Override
     public boolean isAccountNonExpired() {

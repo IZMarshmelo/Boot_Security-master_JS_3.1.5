@@ -27,8 +27,8 @@ public class Util {
     Role roleAdmin = new Role("ROLE_ADMIN");
 			roleRepository.save(roleAdmin);
 			roleRepository.save(roleUser);
-			Arrays.asList(new User("admin","admin", "admin", (byte) 22, "admin@bk.ru", "1111", Set.of(roleAdmin, roleUser)),
-            new User("user", "user", "user", (byte) 20, "user@bk.ru", "2222", Set.of(roleUser)))
+			Arrays.asList(new User("admin", "admin", (byte) 22, "admin@bk.ru", "1111", Set.of(roleAdmin, roleUser)),
+            new User( "user", "user", (byte) 20, "user@bk.ru", "2222", Set.of(roleUser)))
             .forEach(userService::addUser);
 };
 }

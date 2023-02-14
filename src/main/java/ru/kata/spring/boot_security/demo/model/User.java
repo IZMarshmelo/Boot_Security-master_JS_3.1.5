@@ -166,10 +166,6 @@ public class User implements UserDetails {
                 '}';
     }
 
-    /*public String getRolesToString() {
-        return roles.stream().map(Role::getName).map(role-> role.replace("ROLE_", "")).collect(Collectors.joining(", "));
-    }*/
-
     public String getRolesToString() {
         StringBuilder sb = new StringBuilder();
         for (Role role : roles) {

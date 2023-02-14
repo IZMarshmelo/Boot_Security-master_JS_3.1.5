@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void editUser(User user) {
+    public void editUser(User user, Long id) {
         User byId = userRepository.findById(user.getId()).orElseThrow();
         byId.toUser(user);
         userRepository.save(byId);

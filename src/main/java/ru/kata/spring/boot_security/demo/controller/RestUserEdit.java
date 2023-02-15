@@ -26,12 +26,12 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/admin")
-public class RestAdminController {
+public class RestUserEdit {
 
     private final UserService userService;
 
     @Autowired
-    public RestAdminController(UserService userService) {
+    public RestUserEdit(UserService userService) {
         this.userService = userService;
     }
 
